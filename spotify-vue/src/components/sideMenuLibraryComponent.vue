@@ -6,7 +6,7 @@
   <div class="menu-library">
     <h1 class="menu-library-title"><span class="material-symbols-outlined">
 import_contacts
-</span>Biblioteca</h1>
+</span>Sua Biblioteca</h1>
     <div class="menu-library-items">
       <button>Músicas curtidas</button>
       <button>Radar de Novidades</button>
@@ -39,9 +39,16 @@ import_contacts
   align-items: center;
   gap: 15px;
   padding: 10px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--fontColorSmall);
+  transition: 500ms;
 }
+
+.menu-library-title:hover {
+    transform: scale(1.05);
+    color: var(--fontColorTitle)
+  }
+
 
 .menu-library-items button {
   display: flex;
