@@ -54,7 +54,7 @@ export default {
 </script>
 
 <template>
-  <h1>Tocados recentemente</h1>
+  <h1>Recomendandos para você</h1>
   <div class="all-shows">
     <div v-for="(album, index) in albums" :key="index" class="playlist">
       <img :src="album.imgSrc" :alt="'Capa do álbum ' + album.albumName">
@@ -87,6 +87,12 @@ h1 {
   border-radius: 5px;
   background: rgba(49, 49, 49, 0.53);
   gap: 10px;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.playlist:hover {
+  background: rgba(65, 64, 64, 0.53);
 }
 
 .playlist img {

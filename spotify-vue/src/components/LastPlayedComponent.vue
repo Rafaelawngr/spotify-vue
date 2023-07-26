@@ -66,8 +66,14 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  background: rgba(86, 86, 86, 0.49);
+  background: #5453537C;
   gap: 10px;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.playlist:hover {
+  background: #67676799;
 }
 
 .img-container {
