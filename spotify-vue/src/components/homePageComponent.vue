@@ -1,16 +1,32 @@
-<script setup>
+<script>
 
 import HeaderComponent from "./headerComponent.vue";
 import LastPlayedComponent from "./LastPlayedComponent.vue";
 import ForYouComponent from "./ForYouComponent.vue";
+
+export default {
+  components: {
+    HeaderComponent,
+    LastPlayedComponent,
+    ForYouComponent
+  },
+  setup() {
+
+  
+  return {
+    titulo: 'Título do Componente',
+  };
+
+}
+}
+
 </script>
 
 <template>
   <main>
     <HeaderComponent/>
     <LastPlayedComponent />
-    <ForYouComponent />
-<!--    <h2>Feitos para você</h2>-->
+    <ForYouComponent :titulo="titulo" />
     <ForYouComponent />
   </main>
 </template>
