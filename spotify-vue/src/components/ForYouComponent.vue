@@ -41,6 +41,12 @@
 </template>
 
 <style scoped>
+h1 {
+  margin-top: 10px;
+  color: var(--fontColorTitle);
+  padding: 10px;
+  font-size: 1.15rem;
+}
 
 .all-shows {
   display: flex;
@@ -51,8 +57,7 @@
 .playlist {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  padding: 10px;
+  padding: 20px;
   width: 180px;
   height: 280px;
   border-radius: 5px;
@@ -61,29 +66,20 @@
 }
 
 .playlist img {
-  width: 90%;
-  margin: 10px;
+  width: 100%;
   border-radius: 3px;
 }
 
-h1 {
-  margin-top: 10px;
-  color: var(--fontColorTitle);
-  padding: 10px;
-  font-size: 1.15rem;
-}
 
 h2 {
   font-size: .95rem;
   color: var(--fontColorTitle);
-  margin-left: 10px;
 }
 
 h3 {
   font-size: .85rem;
   font-weight: 400;
   color: var(--fontColorSmall);
-  margin-left: 10px;
 }
 
 </style>
