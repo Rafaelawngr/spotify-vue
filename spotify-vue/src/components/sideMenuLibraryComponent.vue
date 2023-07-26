@@ -54,11 +54,17 @@ import_contacts
   display: flex;
   flex-direction: column;
   padding: 10px;
-  font-size: .8rem;
+  font-size: .85rem;
   font-weight: 600;
   color: var(--fontColorSmall);
   background: none;
   border: none;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.menu-library-items button:hover {
+  color: var(--fontColorTitle)
 }
 
 </style>

@@ -12,7 +12,6 @@ import ForYouComponent from "./ForYouComponent.vue";
     <ForYouComponent />
 <!--    <h2>Feitos para você</h2>-->
     <ForYouComponent />
-    <ForYouComponent />
   </main>
 </template>
 
