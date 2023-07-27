@@ -19,7 +19,7 @@ export default {
           imgSrc: 'https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02',
           musicName: 'Circles',
           artistName: 'Post Malone',
-          liked: false
+          duration: '3:46'
         },
       ]
     }
@@ -58,9 +58,9 @@ export default {
         <progress value="0" max="1"></progress>
       </div>
       <div class="point"></div>
-      <div class="time">
+      <div class="time" v-for="song in nowPlaying">
         <p class="current-time">0:00</p>
-        <p class="duration">3:46</p>
+        <p class="duration">{{ song.duration }}</p>
       </div>
     </div>
   </div>
@@ -227,7 +227,7 @@ progress {
   justify-content: space-between;
   color: var(--fontColorSmall);
   font-size: .8rem;
-  width: 120%;
+  width: 115%;
   position: absolute;
 }
 
