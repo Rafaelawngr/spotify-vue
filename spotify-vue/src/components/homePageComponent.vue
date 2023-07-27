@@ -3,18 +3,24 @@
 import HeaderComponent from "./headerComponent.vue";
 import LastPlayedComponent from "./LastPlayedComponent.vue";
 import ForYouComponent from "./ForYouComponent.vue";
+import {TYPES} from "../assets/utils";
 
 export default {
+  computed: {
+    TYPES() {
+      return TYPES
+    }
+  },
   components: {
     HeaderComponent,
     LastPlayedComponent,
     ForYouComponent
   },
   setup() {
-
+    
   
   return {
-    titulo: 'Título do Componente',
+   
   };
 
 }
@@ -26,8 +32,9 @@ export default {
   <main>
     <HeaderComponent/>
     <LastPlayedComponent />
-    <ForYouComponent :titulo="titulo" />
-    <ForYouComponent />
+    <ForYouComponent titulo="Recomendados para você" :type="TYPES.RECOMMENDED"/>
+    <ForYouComponent titulo="Os maiores Hits do Momento" :type="TYPES.HITS"/>
+    <ForYouComponent titulo="Seus Programas" :type="TYPES.PODCASTS"/>
   </main>
 </template>
 
@@ -38,7 +45,6 @@ main {
   flex-direction: column;
   width: 100%;
   max-height: 770px;
-  padding: 10px;
   grid-area: main;
   border-radius: 10px;
   background: linear-gradient(360deg, #121212 14.84%, #232323 70.76%, #404040 100%);

@@ -1,17 +1,41 @@
-<script setup>
+<script>
+  import LastPlayedComponent from "./LastPlayedComponent.vue";
+  import ForYouComponent from "./ForYouComponent.vue";
 
+  export default {
+    name: 'headerComponent',
+    
+    setup() {
+   
+      
+      let selectedImage;
+      let previewFile;
+      let file;
+      let reader = new FileReader();
+      
+      reader.onloadend = () => {
+        previewFile.src = reader.result;
+        selectedImage = reader.result;
+      };
+      
+      
+    return {
+      // changePic
+    }
+    }
+  }
 </script>
 
 <template>
 
   <div class="header">
-  <div class="arrows">
-    <button class="material-symbols-outlined">chevron_left</button>
-    <button class="material-symbols-outlined">chevron_right</button> 
-  </div>
+    <div class="arrows">
+      <button class="material-symbols-outlined">chevron_left</button>
+      <button class="material-symbols-outlined">chevron_right</button>
+    </div>
 
-    <button class="profile-pic"> 
-      <img src="https://www.pngkey.com/png/full/349-3499617_person-placeholder-person-placeholder.png" alt=""> </button>
+    <button @click="changePic" class="profile-pic">
+      <img src="https://www.pngkey.com/png/full/349-3499617_person-placeholder-person-placeholder.png" alt=""></button>
   </div>
 
 </template>
@@ -26,7 +50,7 @@
   align-items: center;
   width: 100%;
   height: 8%;
-  background: linear-gradient(180deg, rgba(56, 56, 56, 0.60) 0%, rgba(64, 64, 64, 0.00) 100%);
+  background: linear-gradient(180deg, rgba(56, 56, 56, 0.70) 0%, rgba(64, 64, 64, 0.10) 100%);
 }
 
 .arrows {
@@ -54,7 +78,7 @@
   border: 2px solid rgba(49, 49, 49, 0.53);
 }
 
-.profile-pic img{
- width: 25px;
+.profile-pic img {
+  width: 25px;
 }
 </style>

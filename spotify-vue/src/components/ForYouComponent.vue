@@ -1,15 +1,20 @@
 <script>
 
+import {onMounted, ref} from "vue";
+import {TYPES} from "../assets/utils";
+
 export default {
   name: 'ForYouComponent',
   props: {
     titulo: String,
+    type: Number,
   },
 
-  setup() {
-
-    return {
-      albums: [
+  setup(props) {
+    
+    const selectedList = ref([])
+    
+    let albumsRecommended = [
         {
           imgSrc: 'https://media.npr.org/assets/img/2012/12/03/mellon-collie-and-the-infinite-sadness---cover-art_custom-ab1a9effa9ca9ee17ff640cdda0fc03fc5d09712.jpg',
           albumName: 'Mellon Collie And The Infinite Sadness',
@@ -45,7 +50,95 @@ export default {
           albumName: "Hollywood's Bleeding",
           artistName: 'Post Malone'
         },
+        {
+          imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/4/1/9/7/721091556657074.jpg',
+          albumName: "<atrás/além>",
+          artistName: 'O Terno'
+        },
       ]
+
+    let albumsHits = [
+      {
+        imgSrc: 'https://i.scdn.co/image/ab67706f000000025a17b6b5ca62479fe6eb1076',
+        albumName: 'Top Brasil',
+        artistName: 'Vulgo FK e os maiores hits do país'
+      },
+
+      {
+        imgSrc: 'https://wesleysafadao.com.br/ws/wp-content/uploads/2021/01/whatsapp-image-2021-01-15-at-18-51-31.jpeg',
+        albumName: 'Esquenta Sertanejo',
+        artistName: 'O melhor do sertanejo em uma só playlist!'
+      },
+
+      {
+        imgSrc: 'https://images.genius.com/9981be1fb5fa67fb8ba50d3f54b7b73e.640x640x1.jpg',
+        albumName: "Today's Top Hits",
+        artistName: 'Travis Scott is on top of the Hottest 50!'
+      },
+
+      {
+        imgSrc: 'https://i.scdn.co/image/ab67706f00000002cba280fdd19d553842ccbee1',
+        albumName: 'Hot Hits Brasil',
+        artistName: 'Os grandes hits do momento estão aqui!'
+      },
+
+      {
+        imgSrc: 'https://i.scdn.co/image/ab67706f00000002d971c6c23114fc7636dc23eb',
+        albumName: 'Viral Hits',
+        artistName: 'Viral, trending and taking off.'
+      },
+    ]
+
+    let albumsPodcasts = [
+      {
+        imgSrc: 'https://cdns-images.dzcdn.net/images/talk/1092be16f0b601fb78cf309e56d83446/264x264.jpg',
+        albumName: 'Quinta Misteriosa',
+        artistName: 'Jaqueline Guerreiro'
+      },
+
+      {
+        imgSrc: 'https://i.scdn.co/image/ab6765630000ba8a41e6fdb39dd6cbda1db0f609',
+        albumName: 'Papo de UX',
+        artistName: 'Luan Mateus'
+      },
+
+      {
+        imgSrc: 'https://i1.sndcdn.com/avatars-drypf0vYvBrzTHDy-s2i0hw-t500x500.jpg',
+        albumName: 'Não Inviabilize',
+        artistName: 'Déia Freitas'
+      },
+
+      {
+        imgSrc: 'https://i.scdn.co/image/ab67656300005f1f386f458ac9f4254e421eb4b0',
+        albumName: 'Psicologia na Prática',
+        artistName: 'Alana Anijar'
+      },
+
+      {
+        imgSrc: 'https://m.media-amazon.com/images/I/51FH-7VPPlL.jpg',
+        albumName: 'A Silenciosa',
+        artistName: 'Chico Felitti'
+      },
+
+      {
+        imgSrc: 'https://s2.glbimg.com/77Crj-wzU6aTIxRwTt-hdo2kiVY=/600x600/smart/https://s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/audiopub-podcasts/bs/2022/D/H/Gg3iiASvmYXiIoi7O62w/capa-modus-operandi-1000x1000.png',
+        albumName: 'Modus Operandi',
+        artistName: 'Globoplay'
+      },
+    ]
+    
+    onMounted(() => {
+      if (props.type === TYPES.RECOMMENDED) {
+        selectedList.value =  albumsRecommended
+      } else if (props.type === TYPES.HITS) {
+        selectedList.value = albumsHits
+      } else {
+        selectedList.value = albumsPodcasts
+      }
+    })
+    
+    return {
+      selectedList
     }
   },
 
@@ -54,9 +147,12 @@ export default {
 </script>
 
 <template>
-  <h1>Recomendandos para você</h1>
+  <div class="title">
+  <h1>{{ titulo }}</h1>
+    <p>Mostrar tudo</p>
+  </div>
   <div class="all-shows">
-    <div v-for="(album, index) in albums" :key="index" class="playlist">
+    <div v-for="(album, index) in selectedList" :key="index" class="playlist">
       <img :src="album.imgSrc" :alt="'Capa do álbum ' + album.albumName">
       <h2>{{ album.albumName }}</h2>
       <h3>{{ album.artistName }}</h3>
@@ -65,16 +161,35 @@ export default {
 </template>
 
 <style scoped>
+
+.title {
+  display: flex; 
+  justify-content: space-between;
+  padding: 10px 20px;
+  align-items: center;
+}
+
 h1 {
   margin-top: 10px;
   color: var(--fontColorTitle);
-  padding: 10px;
   font-size: 1.15rem;
+}
+
+p {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--fontColorSmall);
+  transition: 500ms;
+  cursor: pointer;
+}
+
+p:hover {
+  color: var(--fontColorTitle);
 }
 
 .all-shows {
   display: flex;
-  padding: 10px;
+  padding: 20px;
   gap: 20px;
 }
 

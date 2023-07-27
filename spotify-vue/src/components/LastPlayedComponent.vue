@@ -54,7 +54,7 @@ export default {
 
 .all-playlists {
   display: grid;
-  padding: 10px;
+  padding: 10px 20px;
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -89,9 +89,8 @@ export default {
 }
 
 h1 {
-  margin-top: 10px;
   color: var(--fontColorTitle);
-  padding: 10px;
+  padding: 20px;
   font-size: 1.5rem;
 }
 
