@@ -31,7 +31,7 @@ export default {
   <main>
     <HeaderComponent/>
     <LastPlayedComponent />
-    <ForYouComponent titulo="Recomendados para você" :type="TYPES.RECOMMENDED"/>
+    <ForYouComponent titulo="Álbuns Recomendados para Você" :type="TYPES.RECOMMENDED"/>
     <ForYouComponent titulo="Os maiores Hits do Momento" :type="TYPES.HITS"/>
     <ForYouComponent titulo="Seus Programas" :type="TYPES.PODCASTS"/>
   </main>

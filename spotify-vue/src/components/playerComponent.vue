@@ -1,22 +1,31 @@
 <script>
 
+import {ref} from "vue";
 export default {
   name: 'playerComponent',
 
   setup() {
-    
+    const isLiked = ref(false);
 
+    const toggleLike = () => {
+      isLiked.value = !isLiked.value;
+    };
+    
     return {
+      isLiked,
+      toggleLike,
       nowPlaying: [
         {
           imgSrc: 'https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02',
-          musicName: 'teste',
-          artistName: 'teste'
+          musicName: 'Circles',
+          artistName: 'Post Malone',
+          liked: false
         },
       ]
     }
-  }
 }
+};
+
 
 </script>
 
@@ -30,7 +39,8 @@ export default {
       <h2>{{ song.artistName }}</h2>
     </div>
     <div class="like-music">
-      <span class="material-symbols-outlined" @click="hearted">favorite</span>
+      <span class="material-symbols-outlined" :class="{ clicked: isLiked }"
+            @click="toggleLike">favorite</span>
       <span class="material-symbols-outlined">branding_watermark</span>
     </div>
   </div>
@@ -50,7 +60,7 @@ export default {
       <div class="point"></div>
       <div class="time">
         <p class="current-time">0:00</p>
-        <p class="duration">3:40</p>
+        <p class="duration">3:46</p>
       </div>
     </div>
   </div>
@@ -73,6 +83,8 @@ export default {
 
 <style scoped>
 body {
+  position: sticky;
+  bottom: 0;
   justify-content: space-between;
   display: flex;
   align-items: center;
@@ -116,6 +128,7 @@ h2 {
 .like-music {
   display: flex;
   gap: 15px;
+  cursor: pointer;
 }
 
 .now-playing {
@@ -128,7 +141,7 @@ h2 {
   padding: 15px;
   display: flex;
   align-items: center;
-  gap: 20px
+  gap: 20px;
 }
 
 .material-symbols-outlined {
@@ -139,6 +152,11 @@ h2 {
   color: var(--fontColorSmall);
   font-size: 22px;
   transition: 500ms;
+  cursor: pointer;
+}
+
+.clicked {
+  font-variation-settings: 'FILL' 1
 }
 
 .large {
@@ -192,9 +210,8 @@ h2 {
 }
 
 progress {
-  width: 380px;
+  width: 500px;
   height: 6px;
-  cursor: pointer;
 }
 
 .point {

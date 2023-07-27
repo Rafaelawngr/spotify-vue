@@ -14,6 +14,7 @@ export default {
     
     const selectedList = ref([])
     
+    
     let albumsRecommended = [
         {
           imgSrc: 'https://media.npr.org/assets/img/2012/12/03/mellon-collie-and-the-infinite-sadness---cover-art_custom-ab1a9effa9ca9ee17ff640cdda0fc03fc5d09712.jpg',
@@ -55,7 +56,31 @@ export default {
           albumName: "<atrás/além>",
           artistName: 'O Terno'
         },
-      ]
+      {
+        imgSrc: 'https://m.media-amazon.com/images/I/81pf4NjVhfL._UF1000,1000_QL80_.jpg',
+        albumName: 'BALLADS1',
+        artistName: 'Joji'
+      },
+
+      {
+        imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/0/b/7/8/600411507913353.jpg',
+        albumName: 'Cuscobayo',
+        artistName: 'Cuscobayo'
+      },
+
+      {
+        imgSrc: 'https://upload.wikimedia.org/wikipedia/pt/5/51/CTE_Melophobia.jpg',
+        albumName: 'Melophobia',
+        artistName: 'Cage The Elephant'
+      },
+
+      {
+        imgSrc: 'https://m.media-amazon.com/images/I/A1p1y56msuL._UF1000,1000_QL80_.jpg',
+        albumName: 'The Album',
+        artistName: 'Jonas Brothers'
+      },
+
+    ]
 
     let albumsHits = [
       {
@@ -129,15 +154,19 @@ export default {
     
     onMounted(() => {
       if (props.type === TYPES.RECOMMENDED) {
-        selectedList.value =  albumsRecommended
+        selectedList.value =  albumsRecommended.slice(0, 7)
+        
       } else if (props.type === TYPES.HITS) {
         selectedList.value = albumsHits
       } else {
         selectedList.value = albumsPodcasts
       }
     })
-    
+    const showAll = () => {
+      selectedList.value =  albumsRecommended
+    }
     return {
+      showAll,
       selectedList
     }
   },
@@ -149,7 +178,7 @@ export default {
 <template>
   <div class="title">
   <h1>{{ titulo }}</h1>
-    <p>Mostrar tudo</p>
+    <button class="show-more" @click="showAll">Mostrar tudo</button>
   </div>
   <div class="all-shows">
     <div v-for="(album, index) in selectedList" :key="index" class="playlist">
@@ -175,15 +204,17 @@ h1 {
   font-size: 1.15rem;
 }
 
-p {
+.show-more {
   font-size: .85rem;
   font-weight: 500;
   color: var(--fontColorSmall);
   transition: 500ms;
   cursor: pointer;
+  background: none;
+  border: none;
 }
 
-p:hover {
+.show-more:hover {
   color: var(--fontColorTitle);
 }
 

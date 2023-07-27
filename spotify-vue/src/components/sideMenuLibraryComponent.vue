@@ -25,7 +25,6 @@ import_contacts
 .menu-library {
   display: flex;
   flex-direction: column;
-  align-items: start;
   padding: 10px;
   background: var(--sideMenuColor);
   width: 100%;
