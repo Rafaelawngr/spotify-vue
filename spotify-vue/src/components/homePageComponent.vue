@@ -4,6 +4,7 @@ import HeaderComponent from "./headerComponent.vue";
 import LastPlayedComponent from "./LastPlayedComponent.vue";
 import ForYouComponent from "./ForYouComponent.vue";
 import {TYPES} from "../assets/utils";
+import {ref} from "vue";
 
 export default {
   computed: {
@@ -17,23 +18,34 @@ export default {
     ForYouComponent
   },
   setup() {
-    
-  return {
-   
-  };
 
-}
+    const IsInitialState = ref(true)
+    const reset = () => {
+      IsInitialState.value = true
+    }
+
+    const goForward = () => {
+      IsInitialState.value = false
+    }
+
+    return {
+      reset,
+      goForward,
+      IsInitialState
+    };
+
+  }
 }
 
 </script>
 
 <template>
   <main>
-    <HeaderComponent/>
-    <LastPlayedComponent />
-    <ForYouComponent titulo="Álbuns Recomendados para Você" :type="TYPES.RECOMMENDED"/>
-    <ForYouComponent titulo="Os maiores Hits do Momento" :type="TYPES.HITS"/>
-    <ForYouComponent titulo="Seus Programas" :type="TYPES.PODCASTS"/>
+    <HeaderComponent @goBackClick="reset"/>
+    <LastPlayedComponent/>
+    <ForYouComponent titulo="Álbuns Recomendados para Você" :type="TYPES.RECOMMENDED" @show-all="goForward" :reset="IsInitialState"/>
+    <ForYouComponent titulo="Os maiores Hits do Momento" :type="TYPES.HITS" @show-all="goForward"/>
+    <ForYouComponent titulo="Seus Programas" :type="TYPES.PODCASTS" @show-all="goForward"/>
   </main>
 </template>
 

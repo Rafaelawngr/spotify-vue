@@ -1,61 +1,65 @@
 <script>
 
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {TYPES} from "../assets/utils";
+import HeaderComponent from "./headerComponent.vue";
 
 export default {
   name: 'ForYouComponent',
   props: {
     titulo: String,
     type: Number,
+    reset: Boolean
   },
+  emits: [
+    "show-all"
+  ],
 
-  setup(props) {
-    
+  setup(props, {emit}) {
+
     const selectedList = ref([])
-    
-    
+
     let albumsRecommended = [
-        {
-          imgSrc: 'https://media.npr.org/assets/img/2012/12/03/mellon-collie-and-the-infinite-sadness---cover-art_custom-ab1a9effa9ca9ee17ff640cdda0fc03fc5d09712.jpg',
-          albumName: 'Mellon Collie And The Infinite Sadness',
-          artistName: 'The Smashing Pumpkins'
-        },
+      {
+        imgSrc: 'https://media.npr.org/assets/img/2012/12/03/mellon-collie-and-the-infinite-sadness---cover-art_custom-ab1a9effa9ca9ee17ff640cdda0fc03fc5d09712.jpg',
+        albumName: 'Mellon Collie And The Infinite Sadness',
+        artistName: 'The Smashing Pumpkins'
+      },
 
-        {
-          imgSrc: 'https://m.media-amazon.com/images/I/91UUbDedB1S._UF1000,1000_QL80_.jpg',
-          albumName: 'Happier Than Ever',
-          artistName: 'Billie Eilish'
-        },
+      {
+        imgSrc: 'https://m.media-amazon.com/images/I/91UUbDedB1S._UF1000,1000_QL80_.jpg',
+        albumName: 'Happier Than Ever',
+        artistName: 'Billie Eilish'
+      },
 
-        {
-          imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/5/2/9/0/01647262484.jpg',
-          albumName: 'Gêmeos',
-          artistName: 'Terno Rei'
-        },
+      {
+        imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/5/2/9/0/01647262484.jpg',
+        albumName: 'Gêmeos',
+        artistName: 'Terno Rei'
+      },
 
-        {
-          imgSrc: 'https://m.media-amazon.com/images/I/91N5ovoYjoL._UF1000,1000_QL80_.jpg',
-          albumName: 'Brand New Eyes',
-          artistName: 'Paramore'
-        },
+      {
+        imgSrc: 'https://m.media-amazon.com/images/I/91N5ovoYjoL._UF1000,1000_QL80_.jpg',
+        albumName: 'Brand New Eyes',
+        artistName: 'Paramore'
+      },
 
-        {
-          imgSrc: 'https://upload.wikimedia.org/wikipedia/pt/thumb/d/dc/The_Black_Parade.jpg/220px-The_Black_Parade.jpg',
-          albumName: 'The Black Parade',
-          artistName: 'My Chemical Romance'
-        },
+      {
+        imgSrc: 'https://upload.wikimedia.org/wikipedia/pt/thumb/d/dc/The_Black_Parade.jpg/220px-The_Black_Parade.jpg',
+        albumName: 'The Black Parade',
+        artistName: 'My Chemical Romance'
+      },
 
-        {
-          imgSrc: 'https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02',
-          albumName: "Hollywood's Bleeding",
-          artistName: 'Post Malone'
-        },
-        {
-          imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/4/1/9/7/721091556657074.jpg',
-          albumName: "<atrás/além>",
-          artistName: 'O Terno'
-        },
+      {
+        imgSrc: 'https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02',
+        albumName: "Hollywood's Bleeding",
+        artistName: 'Post Malone'
+      },
+      {
+        imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/4/1/9/7/721091556657074.jpg',
+        albumName: "<atrás/além>",
+        artistName: 'O Terno'
+      },
       {
         imgSrc: 'https://m.media-amazon.com/images/I/81pf4NjVhfL._UF1000,1000_QL80_.jpg',
         albumName: 'BALLADS1',
@@ -151,19 +155,26 @@ export default {
         artistName: 'Globoplay'
       },
     ]
-    
+
     onMounted(() => {
       if (props.type === TYPES.RECOMMENDED) {
-        selectedList.value =  albumsRecommended.slice(0, 7)
-        
+        selectedList.value = albumsRecommended.slice(0, 7)
+
       } else if (props.type === TYPES.HITS) {
         selectedList.value = albumsHits
       } else {
         selectedList.value = albumsPodcasts
       }
     })
+
+    watch(() => props.reset, () => {
+      if (props.reset === true) {
+        selectedList.value = albumsRecommended.slice(0, 7)
+      }
+    })
     const showAll = () => {
-      selectedList.value =  albumsRecommended
+      selectedList.value = albumsRecommended
+      emit("show-all")
     }
     return {
       showAll,
@@ -177,11 +188,11 @@ export default {
 
 <template>
   <div class="title">
-  <h1>{{ titulo }}</h1>
+    <h1>{{ titulo }}</h1>
     <button class="show-more" @click="showAll">Mostrar tudo</button>
   </div>
   <div class="all-shows">
-    <div v-for="(album, index) in selectedList" :key="index" class="playlist">
+    <div v-for="(album, index) in selectedList" :key="index" class="playlist" @click="play">
       <img :src="album.imgSrc" :alt="'Capa do álbum ' + album.albumName">
       <h2>{{ album.albumName }}</h2>
       <h3>{{ album.artistName }}</h3>
@@ -192,7 +203,7 @@ export default {
 <style scoped>
 
 .title {
-  display: flex; 
+  display: flex;
   justify-content: space-between;
   padding: 10px 20px;
   align-items: center;
@@ -221,6 +232,7 @@ h1 {
 .all-shows {
   margin-bottom: 20px;
   display: flex;
+  flex-wrap: wrap;
   padding: 20px;
   gap: 20px;
 }

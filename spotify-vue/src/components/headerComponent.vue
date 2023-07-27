@@ -2,15 +2,28 @@
 
   export default {
     name: 'headerComponent',
+    emits: [
+      "goBackClick"
+    ],
 
-  }
+    setup(_, {emit}) {
+      const goBack = () => {
+      emit ("goBackClick")
+    }    
+    return {
+      goBack
+    }
+
+    }
+  };
+ 
 </script>
 
 <template>
 
   <div class="header">
     <div class="arrows">
-      <button class="material-symbols-outlined">chevron_left</button>
+      <button class="material-symbols-outlined" @click="goBack">chevron_left</button>
       <button class="material-symbols-outlined">chevron_right</button>
     </div>
 
