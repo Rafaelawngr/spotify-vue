@@ -1,28 +1,8 @@
 <script>
-  import LastPlayedComponent from "./LastPlayedComponent.vue";
-  import ForYouComponent from "./ForYouComponent.vue";
 
   export default {
     name: 'headerComponent',
-    
-    setup() {
-   
-      
-      let selectedImage;
-      let previewFile;
-      let file;
-      let reader = new FileReader();
-      
-      reader.onloadend = () => {
-        previewFile.src = reader.result;
-        selectedImage = reader.result;
-      };
-      
-      
-    return {
-      // changePic
-    }
-    }
+
   }
 </script>
 
@@ -34,8 +14,9 @@
       <button class="material-symbols-outlined">chevron_right</button>
     </div>
 
-    <button @click="changePic" class="profile-pic">
-      <img src="https://www.pngkey.com/png/full/349-3499617_person-placeholder-person-placeholder.png" alt=""></button>
+    <div class="profile-pic">
+     <img src="https://avatars.githubusercontent.com/u/107516309?v=4" alt="">
+</div>
   </div>
 
 </template>
@@ -70,15 +51,12 @@
   font-size: 25px;
 }
 
-.profile-pic {
-  margin-right: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid rgba(49, 49, 49, 0.53);
-}
-
 .profile-pic img {
-  width: 25px;
+  margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 3px solid var(--sideMenuColor);
+  cursor: pointer;
 }
 </style>

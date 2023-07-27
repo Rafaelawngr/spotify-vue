@@ -58,6 +58,7 @@ export default {
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  margin-bottom: 20px;
 }
 
 .playlist {

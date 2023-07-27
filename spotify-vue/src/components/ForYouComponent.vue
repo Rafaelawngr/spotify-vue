@@ -188,6 +188,7 @@ p:hover {
 }
 
 .all-shows {
+  margin-bottom: 20px;
   display: flex;
   padding: 20px;
   gap: 20px;
@@ -197,8 +198,8 @@ p:hover {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 180px;
-  height: 280px;
+  width: 200px;
+  height: 300px;
   border-radius: 5px;
   background: rgba(49, 49, 49, 0.53);
   gap: 10px;
