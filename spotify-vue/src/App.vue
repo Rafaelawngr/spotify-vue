@@ -7,7 +7,6 @@
 
 <script>
 
-import { ref } from "vue";
 import SideMenuComponent from "./components/sideMenuComponent.vue";
 import HomePageComponent from "./components/homePageComponent.vue";
 import PlayerComponent from "./components/playerComponent.vue";
@@ -23,12 +22,9 @@ export default {
   },
   
   setup() {
-    const player = () => {
-      showPlayer.value = true
-    }
     
     return {
-      player
+     
     }
   }
 } 

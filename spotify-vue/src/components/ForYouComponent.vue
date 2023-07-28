@@ -1,21 +1,28 @@
 <script>
 
-import {computed, onMounted, ref, watch} from "vue";
+import { onMounted, ref, watch} from "vue";
 import {TYPES} from "../assets/utils";
-import HeaderComponent from "./headerComponent.vue";
+
 
 export default {
   name: 'ForYouComponent',
   props: {
     titulo: String,
     type: Number,
-    reset: Boolean
+    reset: Boolean,
+    selectedSong: Object
   },
   emits: [
     "show-all"
   ],
 
   setup(props, {emit}) {
+    
+    const selectedSong = ref (Number)
+    
+    const showSelectedSong = (song) => {
+      selectedSong.value = song;
+    }
 
     const selectedList = ref([])
 
@@ -23,42 +30,49 @@ export default {
       {
         imgSrc: 'https://media.npr.org/assets/img/2012/12/03/mellon-collie-and-the-infinite-sadness---cover-art_custom-ab1a9effa9ca9ee17ff640cdda0fc03fc5d09712.jpg',
         albumName: 'Mellon Collie And The Infinite Sadness',
-        artistName: 'The Smashing Pumpkins'
+        artistName: 'The Smashing Pumpkins',
+        duration: '4:53'
       },
 
       {
         imgSrc: 'https://m.media-amazon.com/images/I/91UUbDedB1S._UF1000,1000_QL80_.jpg',
         albumName: 'Happier Than Ever',
-        artistName: 'Billie Eilish'
+        artistName: 'Billie Eilish',
+        duration: '2:58'
       },
 
       {
         imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/5/2/9/0/01647262484.jpg',
         albumName: 'Gêmeos',
-        artistName: 'Terno Rei'
+        artistName: 'Terno Rei',
+        duration: '3:25'
       },
 
       {
         imgSrc: 'https://m.media-amazon.com/images/I/91N5ovoYjoL._UF1000,1000_QL80_.jpg',
         albumName: 'Brand New Eyes',
-        artistName: 'Paramore'
+        artistName: 'Paramore',
+        duration: '4:12'
       },
 
       {
         imgSrc: 'https://upload.wikimedia.org/wikipedia/pt/thumb/d/dc/The_Black_Parade.jpg/220px-The_Black_Parade.jpg',
         albumName: 'The Black Parade',
-        artistName: 'My Chemical Romance'
+        artistName: 'My Chemical Romance',
+        duration: '5:11'
       },
 
       {
         imgSrc: 'https://i.scdn.co/image/ab67616d0000b2739478c87599550dd73bfa7e02',
         albumName: "Hollywood's Bleeding",
-        artistName: 'Post Malone'
+        artistName: 'Post Malone',
+        duration: '2.38'
       },
       {
         imgSrc: 'https://akamai.sscdn.co/uploadfile/letras/albuns/4/1/9/7/721091556657074.jpg',
         albumName: "<atrás/além>",
-        artistName: 'O Terno'
+        artistName: 'O Terno',
+        duration: '3:22'
       },
       {
         imgSrc: 'https://m.media-amazon.com/images/I/81pf4NjVhfL._UF1000,1000_QL80_.jpg',
@@ -178,10 +192,11 @@ export default {
     }
     return {
       showAll,
-      selectedList
+      selectedList,
+      selectedSong,
+      showSelectedSong
     }
   },
-
 }
 
 </script>
@@ -192,10 +207,13 @@ export default {
     <button class="show-more" @click="showAll">Mostrar tudo</button>
   </div>
   <div class="all-shows">
-    <div v-for="(album, index) in selectedList" :key="index" class="playlist" @click="play">
+    <div v-for="(album, index) in selectedList" :key="index" class="playlist">
       <img :src="album.imgSrc" :alt="'Capa do álbum ' + album.albumName">
       <h2>{{ album.albumName }}</h2>
       <h3>{{ album.artistName }}</h3>
+      <button class="play-music" v-for="song in selectedList" :key="song.albumName"  @click="showSelectedSong"> <span class="material-symbols-outlined">
+play_arrow
+</span></button>
     </div>
   </div>
 </template>
@@ -244,19 +262,26 @@ h1 {
   width: 200px;
   height: 300px;
   border-radius: 5px;
-  background: rgba(49, 49, 49, 0.53);
+  background: #1f1f1f;
   gap: 10px;
   cursor: pointer;
   transition: 500ms;
+  position: relative;
+  box-shadow: 5px 5px 7px 0 rgba(16, 16, 16, 0.20);
 }
 
 .playlist:hover {
-  background: rgba(65, 64, 64, 0.53);
+  background: #282828;
+}
+
+.playlist:hover .play-music {
+  opacity: 1;
 }
 
 .playlist img {
   width: 100%;
   border-radius: 3px;
+  box-shadow: 5px 5px 10px 0 rgba(16, 16, 16, 0.40);
 }
 
 
@@ -270,5 +295,33 @@ h3 {
   font-weight: 400;
   color: var(--fontColorSmall);
 }
+
+.play-music {
+  display: flex;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: none;
+  box-shadow: 4px 4px 8px 0 rgba(16, 16, 16, 0.10);
+  position: absolute;
+  bottom: 130px;
+  right: 30px;
+  cursor: pointer;
+  background: #1ED760;
+  border-radius: 50%;
+  transition: 500ms;
+}
+
+.play-music:hover {
+  transform: scale(1.1);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+  color: #000;
+  font-size: 30px;
+}
+
 
 </style>

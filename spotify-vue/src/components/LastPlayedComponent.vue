@@ -1,11 +1,30 @@
 <script>
+import {onMounted, ref} from "vue";
 
 export default {
   name: 'LastPlayedComponent',
 
   setup() {
-
+    
+      let hora = new Date();
+      let agora = hora.getHours();
+      let msg = ref("");
+    
+    onMounted(() => {
+      
+        if (agora >= 6 && agora < 12) {
+          msg.value = "Bom dia"
+        } else if (agora >= 12 && agora < 18) {
+          msg.value = "Boa tarde"
+        } else {
+          msg.value = "Boa noite"
+        }
+      
+    })
+    
     return {
+      msg,
+      
       playlists: [
         {
           imgSrc: 'https://images.squarespace-cdn.com/content/v1/5d7b55a7cab21367173472ca/1598395937534-K2GXQTNLPZP6GMC4KX2Y/Copy+of+Copy+of+TRENDII+BLOG+FEATURE+IMAGES.png?format=1000w',
@@ -39,7 +58,7 @@ export default {
 </script>
 
 <template>
-  <h1>Bom dia</h1>
+  <h1 >{{ msg }}</h1>
   <div class="all-playlists">
     <div v-for="playlist in playlists" class="playlist">
       <div class="img-container">
@@ -71,6 +90,7 @@ export default {
   gap: 10px;
   cursor: pointer;
   transition: 500ms;
+  box-shadow: 5px 5px 7px 0 rgba(16, 16, 16, 0.20);
 }
 
 .playlist:hover {

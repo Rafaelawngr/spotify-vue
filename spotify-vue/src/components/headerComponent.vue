@@ -55,13 +55,21 @@
 }
 
 .material-symbols-outlined {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--fontColorSmall);
-  background: var(--sideMenuColor);
+  background: #2d2d2d;
   border: none;
   cursor: pointer;
   border-radius: 50%;
   font-weight: 200;
   font-size: 25px;
+  transition: 500ms;
+}
+
+.material-symbols-outlined:hover {
+  background: var(--sideMenuColor);
 }
 
 .profile-pic img {
