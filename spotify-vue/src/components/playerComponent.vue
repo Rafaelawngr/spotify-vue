@@ -70,9 +70,9 @@ export default {
 
     <div class="progress-bar">
       <div class="bar">
-        <progress value="0" max="1"></progress>
-      </div>
+        <progress value=".5" max="1"></progress>
       <div class="point"></div>
+      </div>
       <div class="time" v-if="currentSong">
         <p class="current-time">0:00</p>
         <p class="duration">{{  currentSong.duration }}</p>
@@ -203,31 +203,28 @@ h2 {
   gap: 10px;
 }
 
+
+ 
 .progress-bar {
-  height: 8px;
+  height: 6px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  background: var(--sideMenuColor);
 }
 
-
 .bar {
-  width: 100%;
-  height: 5px;
-  display: flex;
+  display: inline-flex;
   cursor: pointer;
-  border-radius: 5px;
-  background-color: var(--sideMenuColor);
-
 }
 
 progress {
   width: 500px;
-  height: 5px;
+  height: 6px;
   background: var(--sideMenuColor);
-  border-radius: 5px;
+  
 }
 
 .point {
@@ -235,7 +232,6 @@ progress {
   height: 15px;
   background-color: var(--fontColorSmall);
   border-radius: 50%;
-  margin-left: -2px;
 }
 
 .time {
@@ -247,6 +243,8 @@ progress {
   position: absolute;
 }
 
+
+
 .volume {
   display: flex;
   align-items: center;
@@ -254,25 +252,15 @@ progress {
 }
 
 .slider {
-  -webkit-appearance: none;
   -webkit-transition: 200ms;
   width: 100%;
   height: 5px;
-  background-color: var(--sideMenuColor);
-  border-radius: 5px;
-  transition: 500ms;
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: var(--fontColorSmall);
-  border-radius: 50%;
   cursor: pointer;
+  background: #1ED760;
 }
-
 
 </style>
 
